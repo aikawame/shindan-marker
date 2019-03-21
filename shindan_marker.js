@@ -1,10 +1,13 @@
 export default class ShindanMarker {
   constructor(keywordManager, targetSelector) {
+    this._MAX_RETRY_COUNT = 10
+
     this._keywordManager = keywordManager
     this._targetSelector = targetSelector
   }
 
-  execute() {
+  execute(tryCount = 0) {
+    if (tryCount >= this._MAX_RETRY_COUNT) return
     const trendLinks = document.querySelectorAll(this._targetSelector)
     if (trendLinks.length >= 10) {
       for (let trendLink of trendLinks) {
@@ -12,7 +15,8 @@ export default class ShindanMarker {
         this._observeTrends(trendLink)
       }
     } else {
-      setTimeout(() => this.execute(), 1000)
+      tryCount += 1
+      setTimeout(() => this.execute(tryCount), tryCount * 1000)
     }
   }
 
