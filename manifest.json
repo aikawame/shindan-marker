@@ -6,6 +6,8 @@
   "content_scripts": [
     {
       "matches": [
+        "*://twitter.com/home",
+        "*://twitter.com/i/trends",
         "*://tweetdeck.twitter.com/*"
       ],
       "css": ["content.css"],
