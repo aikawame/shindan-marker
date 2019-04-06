@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>診断マーカー</title>
+  <script src="options.js"></script>
+</head>
+<body>
+<h1>診断マーカー</h1>
+<form name="options">
+  <dl>
+    <dt>
+      マークの見た目
+    </dt>
+    <dd>
+      <label>
+        <input type="radio" name="appearance" value="highlighter" />
+        <span class="highlighter">蛍光ペン</span>
+      </label>
+    </dd>
+    <dd>
+      <label>
+        <input type="radio" name="appearance" value="strikethrough" />
+        <span class="strikethrough">打ち消し線</span>
+      </label>
+    </dd>
+    <dt>
+      対象サービス
+    </dt>
+    <dd>
+      <label>
+        <input type="checkbox" name="services[]" value="shindanmaker" />
+        診断メーカー
+      </label>
+    </dd>
+    <dd>
+      <label>
+        <input type="checkbox" name="services[]" value="applimaker" />
+        アプリ☆メーカー
+      </label>
+    </dd>
+  </dl>
+</form>
+</body>
+</html>
