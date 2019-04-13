@@ -1,12 +1,18 @@
-class KeywordManager {
-  constructor() {
-    this._JSON_URLS = [
-      'https://assets.wor.jp/rss/json/shindanmaker/hot.json',
-      'https://assets.wor.jp/rss/json/applimaker/ranking.json'
-    ]
-    this._JSON_CHECK_MIN = 20
+export default class KeywordManager {
+  static get SERVICE_URLS() {
+    return {
+      shindanmaker: 'https://assets.wor.jp/rss/json/shindanmaker/hot.json',
+      applimaker: 'https://assets.wor.jp/rss/json/applimaker/ranking.json'
+    }
+  }
 
+  static get JSON_CHECK_MIN() {
+    return 20
+  }
+
+  constructor(services) {
     this._keywords = []
+    this._targetServiceUrls = services.map(service => this.SERVICE_URLS[service])
   }
 
   getKeywords() {
@@ -19,25 +25,21 @@ class KeywordManager {
   }
 
   _update() {
-    const fetchPromises = this._JSON_URLS.map(url => fetch(url))
+    const fetchPromises = this._targetServiceUrls.map(url => fetch(url))
     Promise.all(fetchPromises).then(responses => {
       const promises = responses.map(response => response.json())
       Promise.all(promises).then(jsons => {
-        this._keywords = jsons
-          .reduce((prev, current) => prev.concat(current))
-          .map(keyword => keyword.replace('#', ''))
+        this._keywords = jsons.reduce((prev, current) => prev.concat(current)).map(keyword => keyword.replace('#', ''))
       })
     })
   }
 
   _getUpdatingLatency() {
     const currentMin = new Date().getMinutes()
-    if (currentMin < this._JSON_CHECK_MIN) {
-      return 60 * 1000 * (this._JSON_CHECK_MIN - currentMin)
+    if (currentMin < this.JSON_CHECK_MIN) {
+      return 60 * 1000 * (this.JSON_CHECK_MIN - currentMin)
     } else {
-      return 60 * 1000 * (this._JSON_CHECK_MIN - currentMin + 60)
+      return 60 * 1000 * (this.JSON_CHECK_MIN - currentMin + 60)
     }
   }
 }
-
-export default new KeywordManager()

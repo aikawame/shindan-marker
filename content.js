@@ -1,4 +1,5 @@
-import keywordManager from './keyword_manager.js'
+import ChromeStorage from './chrome_storage.js'
+import KeywordManager from './keyword_manager.js'
 import ShindanMarker from './shindan_marker.js'
 
 let targetSelector = null
@@ -11,7 +12,10 @@ switch (window.location.hostname) {
     break
 }
 if (targetSelector) {
-  keywordManager.repeatUpdating()
-  let shindanMarker = new ShindanMarker(keywordManager, targetSelector)
-  shindanMarker.execute()
+  ChromeStorage.load().then(storage => {
+    let keywordManager = new KeywordManager(storage.services)
+    keywordManager.repeatUpdating()
+    let shindanMarker = new ShindanMarker(keywordManager, targetSelector, storage.appearance)
+    shindanMarker.execute()
+  })
 }

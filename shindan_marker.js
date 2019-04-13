@@ -1,13 +1,16 @@
 export default class ShindanMarker {
-  constructor(keywordManager, targetSelector) {
-    this._MAX_RETRY_COUNT = 10
+  static MAX_RETRY_COUNT() {
+    return 10
+  }
 
+  constructor(keywordManager, targetSelector, appearance) {
     this._keywordManager = keywordManager
     this._targetSelector = targetSelector
+    this._appearance = appearance
   }
 
   execute(tryCount = 0) {
-    if (tryCount >= this._MAX_RETRY_COUNT) return
+    if (tryCount >= this.MAX_RETRY_COUNT) return
     const trendLinks = document.querySelectorAll(this._targetSelector)
     if (trendLinks.length >= 10) {
       for (let trendLink of trendLinks) {
@@ -30,7 +33,11 @@ export default class ShindanMarker {
   _mark(trendLink) {
     for (let keyword of this._keywordManager.getKeywords()) {
       if (keyword.indexOf(trendLink.textContent.replace('#', '')) > -1) {
-        trendLink.style.textDecoration = 'line-through'
+        if (this._appearance === 'highliter') {
+          trendLink.style.backgroundColor = '#ffff00'
+        } else {
+          trendLink.style.textDecoration = 'line-through'
+        }
         break
       }
     }
