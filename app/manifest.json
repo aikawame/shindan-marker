@@ -10,8 +10,7 @@
         "*://twitter.com/i/trends",
         "*://tweetdeck.twitter.com/*"
       ],
-      "css": ["content.css"],
-      "js": ["inject.js"]
+      "js": ["content.bundle.js"]
     }
   ],
   "options_page": "options.html",
