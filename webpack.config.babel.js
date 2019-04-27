@@ -1,7 +1,9 @@
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+import CopyWebpackPlugin from 'copy-webpack-plugin'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
 
-module.exports = {
+const IS_DEVELOPMENT = process.argv.includes('development')
+
+export default {
   entry: {
     content: `${__dirname}/app/content.js`,
     options: `${__dirname}/app/options.js`
@@ -10,7 +12,7 @@ module.exports = {
     path: `${__dirname}/dist`,
     filename: '[name].bundle.js'
   },
-  devtool: 'cheap-module-source-map',
+  devtool: IS_DEVELOPMENT ? 'inline-source-map' : false,
   module: {
     rules: [
       {
