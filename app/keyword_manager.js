@@ -12,7 +12,7 @@ export default class KeywordManager {
 
   constructor(services) {
     this._keywords = []
-    this._targetServiceUrls = services.map(service => this.SERVICE_URLS[service])
+    this._targetServiceUrls = services.map(service => KeywordManager.SERVICE_URLS[service])
   }
 
   getKeywords() {
@@ -36,10 +36,10 @@ export default class KeywordManager {
 
   _getUpdatingLatency() {
     const currentMin = new Date().getMinutes()
-    if (currentMin < this.JSON_CHECK_MIN) {
-      return 60 * 1000 * (this.JSON_CHECK_MIN - currentMin)
+    if (currentMin < KeywordManager.JSON_CHECK_MIN) {
+      return 60 * 1000 * (KeywordManager.JSON_CHECK_MIN - currentMin)
     } else {
-      return 60 * 1000 * (this.JSON_CHECK_MIN - currentMin + 60)
+      return 60 * 1000 * (KeywordManager.JSON_CHECK_MIN - currentMin + 60)
     }
   }
 }

@@ -11,7 +11,7 @@ export default class ChromeStorage {
       if (!chrome || !chrome.storage) {
         reject(new Error('chrome.storage is not available.'))
       }
-      chrome.storage.sync.get(this.DEFAULT_SETTINGS, items => {
+      chrome.storage.sync.get(ChromeStorage.DEFAULT_SETTINGS, items => {
         resolve(new ChromeStorage(items))
       })
     })

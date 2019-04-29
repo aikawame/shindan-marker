@@ -13,7 +13,7 @@ switch (window.location.hostname) {
 }
 if (targetSelector) {
   ChromeStorage.load().then(storage => {
-    let keywordManager = new KeywordManager(storage.services)
+    let keywordManager = new KeywordManager(storage.get('services'))
     keywordManager.repeatUpdating()
     let shindanMarker = new ShindanMarker(keywordManager, targetSelector, storage.appearance)
     shindanMarker.execute()
