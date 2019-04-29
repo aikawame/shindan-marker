@@ -33,7 +33,7 @@ export default class ShindanMarker {
   _mark(trendLink) {
     for (let keyword of this._keywordManager.getKeywords()) {
       if (keyword.indexOf(trendLink.textContent.replace('#', '')) > -1) {
-        if (this._appearance === 'highliter') {
+        if (this._appearance === 'highlighter') {
           trendLink.style.backgroundColor = '#ffff00'
         } else {
           trendLink.style.textDecoration = 'line-through'

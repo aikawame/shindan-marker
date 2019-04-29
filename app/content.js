@@ -15,7 +15,7 @@ if (targetSelector) {
   ChromeStorage.load().then(storage => {
     let keywordManager = new KeywordManager(storage.get('services'))
     keywordManager.repeatUpdating()
-    let shindanMarker = new ShindanMarker(keywordManager, targetSelector, storage.appearance)
+    let shindanMarker = new ShindanMarker(keywordManager, targetSelector, storage.get('appearance'))
     shindanMarker.execute()
   })
 }
