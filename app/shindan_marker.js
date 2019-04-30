@@ -12,7 +12,7 @@ export default class ShindanMarker {
   execute(tryCount = 0) {
     if (tryCount >= ShindanMarker.MAX_RETRY_COUNT) return
     const trendLinks = document.querySelectorAll(this._targetSelector)
-    if (trendLinks.length >= 10) {
+    if (trendLinks.length > 3) {
       for (let trendLink of trendLinks) {
         this._mark(trendLink)
         this._observeTrends(trendLink)
