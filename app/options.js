@@ -1,3 +1,4 @@
+import './options.css'
 import ChromeStorage from './chrome_storage.js'
 
 window.onload = () => {
