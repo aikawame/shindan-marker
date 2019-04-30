@@ -30,10 +30,10 @@ export default {
   },
   plugins: [
     new CopyWebpackPlugin([
-      {
-        from: `${__dirname}/app/manifest.json`,
-        to: `${__dirname}/dist`
-      }
+      { from: `${__dirname}/app/manifest.json`, to: `${__dirname}/dist` },
+      { from: `${__dirname}/app/icon_16.png`, to: `${__dirname}/dist` },
+      { from: `${__dirname}/app/icon_48.png`, to: `${__dirname}/dist` },
+      { from: `${__dirname}/app/icon_128.png`, to: `${__dirname}/dist` }
     ]),
     new HtmlWebpackPlugin({
       template: `${__dirname}/app/options.html`,
